@@ -44,27 +44,33 @@ let largestPrimeFactor = function(num) {
 }
 
 let isPalindrome = function(num) {
-  let palindrome = false;
-  for (let i = 0; i < num.length / 2; i++) {
-    if (num[i] != num[num.length - 1 - i]) {
-      console.log("this is not a palindrome");
-      break;
-    } else if (i == num.length / 2 - 1) {
-      console.log("this is a palindrome");
-      palindrome = true;
-    }
-  }
-  return palindrome;
+	let palindrome = true;
+	for (let i = 0; i < num.length - i; i++) {
+		if (num[i] !== num[num.length - 1 - i]) {
+			console.log("this is not a palindrome");
+			palindrome = false;
+		break;
+		} else if (i === num.length - i) {
+			console.log("this is a palindrome");
+		}
+	}
+	return palindrome;
 }
-
-let largestTwoThreeDigitPalindrome = function() {
-	let largestPalindromeProduct = null;
+  
+let largestThreeDigitNumbersProductPalindrome = function() {
+	let largestPalindromeProduct = 0;
 	let tempLargest = null;
-	for (let firstFactor = 999, secondFactor = 999; firstFactor >= secondFactor, secondFactor > 0; firstFactor--, secondFactor--) {
+	let firstFactor = 999, secondFactor = 999;
+	while (firstFactor >= 100 && secondFactor >= 100) {
 		tempLargest = firstFactor * secondFactor;
-		if (isPalindrome(tempLargest)) {
+		if (isPalindrome(toString(tempLargest)) && tempLargest > largestPalindromeProduct) {
 			largestPalindromeProduct = tempLargest;
 			break;
+		} else if (firstFactor > secondFactor) {
+			secondFactor--;
+		} else {
+			firstFactor--;
+			secondFactor--;
 		}
 	}
 	return largestPalindromeProduct;
